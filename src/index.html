@@ -27,11 +27,11 @@
       </p>
 
 
-      <p>
-         结果:<p id='result'></p>
-      </p>
+       <p id='last_container'></p>
 
-
+       <p>
+          结果:<p id='result'></p>
+       </p>
 
     </div>
 
@@ -39,38 +39,37 @@
     <script src="../build/react.js"></script>
     <script src="../build/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
-    <script>
-        var MyView = React.createClass({
+    <script type="text/babel">
+      var MyView = React.createClass({
 
 
-          getInitialState: function () {
-            return { count: 0 };
-          },
-          handleClick: function () {
-            this.setState({
-              count: this.state.count + 1,
-            });
-          },
-
-          render: function () {
-            return (
-
-
-              <button onClick={this.handleClick}>
-                Click me! Number of clicks: {this.state.count}
-              </button>
-            );
-          }
-
-        });
+        getInitialState: function () {
+          return { result: '' };
+        },
+        handleClick: function () {
+          this.setState({
+            count: this.state.result,
+          });
+        },
+        render: function () {
+          return (
+            <button onClick={this.handleClick}>
+              计算
+            </button>
 
 
 
-        ReactDOM.render(
-          <MyView />,
-          document.getElementById('container')
-        );
 
-      </script>
+
+
+          );
+        }
+      });
+      ReactDOM.render(
+        <MyView />,
+        document.getElementById('last_container')
+      );
+    </script>
+
   </body>
 </html>
