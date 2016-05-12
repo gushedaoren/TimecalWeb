@@ -1,77 +1,75 @@
 var QuadraticCalculator = React.createClass({
   getInitialState: function() {
     return {
-      a: 1,
-      b: 3,
-      c: -4
+      times: 1,
+      offset: 35,
+      before: true,
+      result:''
     };
   },
 
-  /**
-   * This function will be re-bound in render multiple times. Each .bind() will
-   * create a new function that calls this with the appropriate key as well as
-   * the event. The key is the key in the state object that the value should be
-   * mapped from.
-   */
   handleInputChange: function(key, event) {
     var partialState = {};
-    partialState[key] = parseFloat(event.target.value);
+    partialState[key] = event.target.value;
     this.setState(partialState);
   },
 
-  render: function() {
-    var statTime=new Date();
-    var a = this.state.a;
-    var b = this.state.b;
-    var c = this.state.c;
-    var root = Math.sqrt(Math.pow(b, 2) - 4 * a * c);
-    var denominator = 2 * a;
-    var x1 = (-b + root) / denominator;
-    var x2 = (-b - root) / denominator;
-    return (
+  handleClick: function (startTime,offset,times,before) {
+    console.log(startTime);
+    this.setState({
+      result: 'test'
+    });
+  },
 
+  render: function() {
+
+    var dateTime=new Date();
+    var hour = dateTime.getHours();
+    var minutes = dateTime.getMinutes();
+    if(hour <10){
+      hour = "0" + hour;
+    }
+    if(minutes <10){
+       minutes = "0" + minutes;
+     }
+    var startTime=hour+":"+minutes;
+    var times = this.state.times;
+    var offset = this.state.offset;
+    var result = this.state.result;
+    var before = this.state.before;
+
+
+
+
+    return (
+     <div>
       <div >
 
         <p>
-          起始时间：<input type="text" name="startTime" value={statTime}></input>
+          起始时间：<input type="text" name="startTime" value={startTime} onChange={this.handleInputChange.bind(null, 'startTime')}></input>
         </p>
 
         <p>
-          时间差  ：<input type="number" name="times" value="1"></input>*<input type="text" name="offset" value="35"></input>
+          时间差  ：<input type="number" name="times" value={times} onChange={this.handleInputChange.bind(null, 'times')}></input>*<input type="text" name="offset" value={offset} onChange={this.handleInputChange.bind(null, 'offset')}></input>
         </p>
 
         <p>
-          往前 <input type="checkbox" name="checkbox" value="1"></input>
+          往前 <input type="checkbox" name="checkbox" value={before}></input>
         </p>
 
 
          <p id='last_container'></p>
 
+
+         <button onClick={this.handleClick(startTime,offset,times,before)}>
+           计算
+         </button>
          <p>
-            结果:<p id='result'></p>
+            结果:<p id='result'>{result}</p>
          </p>
 
       </div>
-      <div>
-        <strong>
-          <em>ax</em><sup>2</sup> + <em>bx</em> + <em>c</em> = 0
-        </strong>
-        <h4>Solve for <em>x</em>:</h4>
-        <p>
-          <label>
-            a: <input type="number" value={a} onChange={this.handleInputChange.bind(null, 'a')} />
-          </label>
-          <br />
-          <label>
-            b: <input type="number" value={b} onChange={this.handleInputChange.bind(null, 'b')} />
-          </label>
-          <br />
-          <label>
-            c: <input type="number" value={c} onChange={this.handleInputChange.bind(null, 'c')} />
-          </label>
-          <br />
-          x: <strong>{x1}, {x2}</strong>
-        </p>
+
       </div>
     );
   }
