@@ -33,15 +33,15 @@ var QuadraticCalculator = React.createClass({
       <div >
 
         <p>
-          起始时间：<input type="text" name="startTime" value={statTime}>
+          起始时间：<input type="text" name="startTime" value={statTime}></input>
         </p>
 
         <p>
-          时间差  ：<input type="number" name="times" value="1">*<input type="text" name="offset" value="35">
+          时间差  ：<input type="number" name="times" value="1"></input>*<input type="text" name="offset" value="35"></input>
         </p>
 
         <p>
-          往前 <input type="checkbox" name="checkbox" value="1">
+          往前 <input type="checkbox" name="checkbox" value="1"></input>
         </p>
 
 
