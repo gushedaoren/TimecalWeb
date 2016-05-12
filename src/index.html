@@ -9,8 +9,6 @@
     <h1>毛毛计算器</h1>
 
 
-    <div id="container">
-    </div>
 
     <div >
 
@@ -35,41 +33,13 @@
 
     </div>
 
+        <div id="container">
+        </div>
 
     <script src="../build/react.js"></script>
     <script src="../build/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
-    <script type="text/babel">
-      var MyView = React.createClass({
 
-
-        getInitialState: function () {
-          return { result: '' };
-        },
-        handleClick: function () {
-          this.setState({
-            count: this.state.result,
-          });
-        },
-        render: function () {
-          return (
-            <button onClick={this.handleClick}>
-              计算
-            </button>
-
-
-
-
-
-
-          );
-        }
-      });
-      ReactDOM.render(
-        <MyView />,
-        document.getElementById('last_container')
-      );
-    </script>
-
+     <script type="text/babel" src="app.js"></script>
   </body>
 </html>
