@@ -20,6 +20,7 @@ var QuadraticCalculator = React.createClass({
   },
 
   render: function() {
+    var statTime=new Date();
     var a = this.state.a;
     var b = this.state.b;
     var c = this.state.c;
@@ -28,6 +29,29 @@ var QuadraticCalculator = React.createClass({
     var x1 = (-b + root) / denominator;
     var x2 = (-b - root) / denominator;
     return (
+
+      <div >
+
+        <p>
+          起始时间：<input type="text" name="startTime" value={statTime}>
+        </p>
+
+        <p>
+          时间差  ：<input type="number" name="times" value="1">*<input type="text" name="offset" value="35">
+        </p>
+
+        <p>
+          往前 <input type="checkbox" name="checkbox" value="1">
+        </p>
+
+
+         <p id='last_container'></p>
+
+         <p>
+            结果:<p id='result'></p>
+         </p>
+
+      </div>
       <div>
         <strong>
           <em>ax</em><sup>2</sup> + <em>bx</em> + <em>c</em> = 0
