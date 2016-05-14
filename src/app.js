@@ -1,4 +1,8 @@
+
+var dateTime,startTime,offset,times,before,result;
 var QuadraticCalculator = React.createClass({
+
+
   getInitialState: function() {
     return {
       times: 1,
@@ -14,29 +18,36 @@ var QuadraticCalculator = React.createClass({
     this.setState(partialState);
   },
 
-  handleClick: function (startTime,offset,times,before) {
+  handleClick: function () {
+    console.log('handleClick');
     console.log(startTime);
-    this.setState({
-      result: 'test'
-    });
+    console.log(offset);
+    console.log(times);
+    console.log(before);
+
   },
 
-  render: function() {
 
-    var dateTime=new Date();
-    var hour = dateTime.getHours();
-    var minutes = dateTime.getMinutes();
-    if(hour <10){
-      hour = "0" + hour;
-    }
-    if(minutes <10){
-       minutes = "0" + minutes;
+  componentWillMount:function(){
+     times = this.state.times;
+     offset = this.state.offset;
+     result = this.state.result;
+     before = this.state.before;
+
+     var dateTime=new Date();
+     var hour = dateTime.getHours();
+     var minutes = dateTime.getMinutes();
+     if(hour <10){
+       hour = "0" + hour;
      }
-    var startTime=hour+":"+minutes;
-    var times = this.state.times;
-    var offset = this.state.offset;
-    var result = this.state.result;
-    var before = this.state.before;
+     if(minutes <10){
+        minutes = "0" + minutes;
+      }
+      startTime=hour+":"+minutes;
+  },
+
+
+  render: function() {
 
 
 
@@ -54,19 +65,19 @@ var QuadraticCalculator = React.createClass({
         </p>
 
         <p>
-          往前 <input type="checkbox" name="checkbox" value={before}></input>
+          往前 <input type="checkbox" name="checkbox" defaultChecked='true' value={before} ></input>
         </p>
 
 
          <p id='last_container'></p>
 
 
-         <button onClick={this.handleClick(startTime,offset,times,before)}>
+         <button  onClick={this.handleClick}>
            计算
          </button>
-         <p>
-            结果:<p id='result'>{result}</p>
-         </p>
+         <div>
+            结果:<div id='result'>{result}</div>
+         </div>
 
       </div>
 
