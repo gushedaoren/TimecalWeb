@@ -98,7 +98,11 @@ var QuadraticCalculator = React.createClass({
         </p>
 
         <p>
-          时间差  ：<input type="number" name="times" value={this.state.times} onChange={this.handleInputChange.bind(null, 'times')}></input>*<input type="text" name="offset" value={this.state.offset} onChange={this.handleInputChange.bind(null, 'offset')}></input>
+          次数    ：<input type="number" name="times" value={this.state.times} onChange={this.handleInputChange.bind(null, 'times')}></input>
+        </p>
+
+        <p>
+          时间差   ：<input type="text" name="offset" value={this.state.offset} onChange={this.handleInputChange.bind(null, 'offset')}></input>
         </p>
 
         <p>
