@@ -21,7 +21,7 @@ var QuadraticCalculator = React.createClass({
     return {
       times: 1,
       offset: 35,
-      checked: false,
+      checked: true,
       result:''
     };
   },
