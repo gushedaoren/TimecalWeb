@@ -2,6 +2,20 @@
 
 var QuadraticCalculator = React.createClass({
 
+  hourStr: function(dateTime) {
+
+    var hour = dateTime.getHours();
+    var minutes = dateTime.getMinutes();
+    if(hour <10){
+      hour = "0" + hour;
+    }
+    if(minutes <10){
+       minutes = "0" + minutes;
+     }
+
+    return hour+":"+minutes;
+  },
+
 
   getInitialState: function() {
     return {
@@ -12,7 +26,12 @@ var QuadraticCalculator = React.createClass({
     };
   },
 
+
+
+
+
   handleChecked: function(event) {
+
     console.log(event.target.checked);
     this.setState({before: event.target.checked});
   },
@@ -25,12 +44,34 @@ var QuadraticCalculator = React.createClass({
 
   handleClick: function () {
     console.log('handleClick');
+    console.log(new Date);
     console.log(this.state.startTime);
     console.log(this.state.offset);
     console.log(this.state.times);
     console.log(this.state.before);
 
-    
+    var delta=this.state.times*this.state.offset*(this.state.before==true?-1:1);
+    console.log(delta);
+
+    var dateStr="2011-06-09 "+this.state.startTime+":00";
+    console.log(dateStr);
+    var startDate=new Date(dateStr);
+    console.log(startDate);
+
+
+    var time=startDate.getTime()+delta*60*1000;
+    console.log(time);
+
+    var resultDate=new Date(time);
+    console.log(resultDate);
+
+    var myresult=this.hourStr(resultDate);
+    console.log(myresult);
+
+
+    this.setState({
+      result: myresult,
+    });
 
   },
 
@@ -38,16 +79,8 @@ var QuadraticCalculator = React.createClass({
   componentWillMount:function(){
 
 
-     var dateTime=new Date();
-     var hour = dateTime.getHours();
-     var minutes = dateTime.getMinutes();
-     if(hour <10){
-       hour = "0" + hour;
-     }
-     if(minutes <10){
-        minutes = "0" + minutes;
-      }
-      this.state.startTime=hour+":"+minutes;
+
+      this.state.startTime=this.hourStr(new Date());
   },
 
 
@@ -71,11 +104,6 @@ var QuadraticCalculator = React.createClass({
         <p>
           往前 <input type="checkbox" name="checkbox"  onChange={this.handleChecked}></input>
         </p>
-
-
-         <p id='last_container'></p>
-
-
          <button  onClick={this.handleClick}>
            计算
          </button>
