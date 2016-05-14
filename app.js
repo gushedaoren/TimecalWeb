@@ -1,5 +1,5 @@
 
-
+var result;
 var QuadraticCalculator = React.createClass({
 
   hourStr: function(dateTime) {
@@ -21,7 +21,7 @@ var QuadraticCalculator = React.createClass({
     return {
       times: 1,
       offset: 35,
-      before: true,
+      checked: false,
       result:''
     };
   },
@@ -33,7 +33,7 @@ var QuadraticCalculator = React.createClass({
   handleChecked: function(event) {
 
     console.log(event.target.checked);
-    this.setState({before: event.target.checked});
+    this.setState({checked: event.target.checked});
   },
 
   handleInputChange: function(key, event) {
@@ -48,15 +48,16 @@ var QuadraticCalculator = React.createClass({
     console.log(this.state.startTime);
     console.log(this.state.offset);
     console.log(this.state.times);
-    console.log(this.state.before);
+    console.log(this.state.checked);
 
-    var delta=this.state.times*this.state.offset*(this.state.before==true?-1:1);
+    var delta=this.state.times*this.state.offset*(this.state.checked==true?-1:1);
     console.log(delta);
 
-    var dateStr="2011-06-09 "+this.state.startTime+":00";
+    var dateStr="2011/06/09 "+this.state.startTime+":00";
     console.log(dateStr);
     var startDate=new Date(dateStr);
     console.log(startDate);
+
 
 
     var time=startDate.getTime()+delta*60*1000;
@@ -65,8 +66,11 @@ var QuadraticCalculator = React.createClass({
     var resultDate=new Date(time);
     console.log(resultDate);
 
+
     var myresult=this.hourStr(resultDate);
     console.log(myresult);
+    result=myresult;
+
 
 
     this.setState({
@@ -77,6 +81,7 @@ var QuadraticCalculator = React.createClass({
 
 
   componentWillMount:function(){
+
 
 
 
@@ -106,13 +111,13 @@ var QuadraticCalculator = React.createClass({
         </p>
 
         <p>
-          往前 <input type="checkbox" name="checkbox"  onChange={this.handleChecked}></input>
+          往前 <input type="checkbox" name="checkbox" defaultChecked='true'  onChange={this.handleChecked}></input>
         </p>
          <button  onClick={this.handleClick}>
            计算
          </button>
          <div>
-            结果:<div id='result'>{this.state.result}</div>
+            结果:<div id='result'>{result}</div>
          </div>
 
       </div>
