@@ -1,5 +1,5 @@
 
-var dateTime,startTime,offset,times,before,result;
+
 var QuadraticCalculator = React.createClass({
 
 
@@ -12,6 +12,11 @@ var QuadraticCalculator = React.createClass({
     };
   },
 
+  handleChecked: function(event) {
+    console.log(event.target.checked);
+    this.setState({before: event.target.checked});
+  },
+
   handleInputChange: function(key, event) {
     var partialState = {};
     partialState[key] = event.target.value;
@@ -20,19 +25,18 @@ var QuadraticCalculator = React.createClass({
 
   handleClick: function () {
     console.log('handleClick');
-    console.log(startTime);
-    console.log(offset);
-    console.log(times);
-    console.log(before);
+    console.log(this.state.startTime);
+    console.log(this.state.offset);
+    console.log(this.state.times);
+    console.log(this.state.before);
+
+    
 
   },
 
 
   componentWillMount:function(){
-     times = this.state.times;
-     offset = this.state.offset;
-     result = this.state.result;
-     before = this.state.before;
+
 
      var dateTime=new Date();
      var hour = dateTime.getHours();
@@ -43,7 +47,7 @@ var QuadraticCalculator = React.createClass({
      if(minutes <10){
         minutes = "0" + minutes;
       }
-      startTime=hour+":"+minutes;
+      this.state.startTime=hour+":"+minutes;
   },
 
 
@@ -57,15 +61,15 @@ var QuadraticCalculator = React.createClass({
       <div >
 
         <p>
-          起始时间：<input type="text" name="startTime" value={startTime} onChange={this.handleInputChange.bind(null, 'startTime')}></input>
+          起始时间：<input type="text" name="startTime" value={this.state.startTime} onChange={this.handleInputChange.bind(null, 'startTime')}></input>
         </p>
 
         <p>
-          时间差  ：<input type="number" name="times" value={times} onChange={this.handleInputChange.bind(null, 'times')}></input>*<input type="text" name="offset" value={offset} onChange={this.handleInputChange.bind(null, 'offset')}></input>
+          时间差  ：<input type="number" name="times" value={this.state.times} onChange={this.handleInputChange.bind(null, 'times')}></input>*<input type="text" name="offset" value={this.state.offset} onChange={this.handleInputChange.bind(null, 'offset')}></input>
         </p>
 
         <p>
-          往前 <input type="checkbox" name="checkbox" defaultChecked='true' value={before} ></input>
+          往前 <input type="checkbox" name="checkbox"  onChange={this.handleChecked}></input>
         </p>
 
 
@@ -76,7 +80,7 @@ var QuadraticCalculator = React.createClass({
            计算
          </button>
          <div>
-            结果:<div id='result'>{result}</div>
+            结果:<div id='result'>{this.state.result}</div>
          </div>
 
       </div>
